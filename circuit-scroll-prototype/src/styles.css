@@ -80,7 +80,7 @@ select {
 .stage-canvas {
   position: relative;
   width: 390px;
-  height: 4480px;
+  height: 7200px;
   transform: scale(var(--stage-scale));
   transform-origin: top left;
 }
@@ -92,7 +92,7 @@ select {
   left: 0;
   margin: 0;
   color: #000;
-  font-size: calc(18px * var(--stage-scale));
+  font-size: calc(36px * var(--stage-scale));
   line-height: 1;
   font-weight: 900;
   letter-spacing: 0;
@@ -240,20 +240,20 @@ h1 {
 
 .story-index {
   position: absolute;
-  top: 8px;
-  left: -38px;
+  top: 15px;
+  left: -46px;
   display: block;
-  width: 28px;
-  font-size: 13px;
+  width: 36px;
+  font-size: 26px;
   line-height: 1;
   font-weight: 900;
   text-align: right;
 }
 
 .story-block h2 {
-  margin: 0 0 10px;
-  font-size: 27px;
-  line-height: 1.02;
+  margin: 0 0 18px;
+  font-size: 54px;
+  line-height: 0.94;
   letter-spacing: 0;
   font-weight: 900;
 }
@@ -261,8 +261,8 @@ h1 {
 .story-block p {
   max-width: 100%;
   margin: 0;
-  font-size: 15px;
-  line-height: 1.32;
+  font-size: 30px;
+  line-height: 1.12;
   letter-spacing: 0;
   font-weight: 800;
 }
