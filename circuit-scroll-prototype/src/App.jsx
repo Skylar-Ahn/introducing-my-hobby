@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const CONTENT_HEIGHT = 3220;
+const STAGE_WIDTH = 390;
+const CONTENT_HEIGHT = 3600;
 const EXTRA_BLANK_SPACE = 1200;
 
 const storyBlocks = [
@@ -8,32 +9,36 @@ const storyBlocks = [
     id: "01",
     title: "I like trees.",
     body: "quiet systems, roots, fungi, shade, and long time scales",
-    x: 112,
-    y: 456,
+    x: 108,
+    y: 540,
+    width: 250,
     revealAt: 0.03,
   },
   {
     id: "02",
     title: "I like strange stories.",
     body: "hardboiled worlds, odd tenderness, and characters who survive",
-    x: 60,
-    y: 810,
+    x: 58,
+    y: 902,
+    width: 280,
     revealAt: 0.18,
   },
   {
     id: "03",
     title: "I love coffee with depth.",
     body: "body, aroma, acidity, and tiny emotional weather changes",
-    x: 190,
-    y: 1125,
+    x: 166,
+    y: 1216,
+    width: 210,
     revealAt: 0.327,
   },
   {
     id: "04",
     title: "I like messy data.",
     body: "labels, edge cases, QA, and the human judgment behind datasets",
-    x: 185,
-    y: 1408,
+    x: 158,
+    y: 1498,
+    width: 220,
     revealAt: 0.451,
   },
   {
@@ -41,49 +46,60 @@ const storyBlocks = [
     title: "I like robots.",
     body: "especially the boundary between motion, perception, and people",
     x: 72,
-    y: 1966,
-    width: 112,
+    y: 1948,
+    width: 185,
     revealAt: 0.636,
   },
   {
     id: "06",
     title: "I like math, even when it hurts.",
     body: "abstraction, structure, and the weird comfort of difficult ideas",
-    x: 166,
-    y: 2288,
-    width: 108,
+    x: 154,
+    y: 2376,
+    width: 174,
     revealAt: 0.683,
+  },
+  {
+    key: "07-copy",
+    id: "07",
+    title: "I like people who notice small things.",
+    body: "small jokes, tiny design choices, quiet kindness, odd details",
+    x: 62,
+    y: 2700,
+    width: 225,
+    revealAt: 0.86,
   },
   {
     id: "07",
     title: "I like people who notice small things.",
     body: "small jokes, tiny design choices, quiet kindness, odd details",
-    x: 58,
-    y: 2988,
+    x: 62,
+    y: 3240,
+    width: 250,
     revealAt: 0.93,
   },
 ];
 
 const terminals = [
-  [195, 292],
-  [44, 565],
-  [82, 595],
-  [279, 648],
-  [324, 726],
+  [195, 380],
+  [44, 655],
+  [82, 685],
+  [279, 738],
+  [324, 816],
   [34, 1598],
   [55, 2044],
   [82, 2248],
   [26, 2384],
   [54, 2384],
   [82, 2384],
-  [349, 2164],
   [300, 2560],
   [258, 3178],
+  [300, 3260],
 ];
 
 const shortCircuits = [
-  { path: "M 90 595 L 190 595 L 273 645", startAt: 0.065, endAt: 0.11 },
-  { path: "M 250 1880 L 250 2020 L 353 2150", startAt: 0.64, endAt: 0.85 },
+  { path: "M 90 685 L 190 685 L 273 735", startAt: 0.065, endAt: 0.11 },
+  { path: "M 304 1880 L 304 2020 L 353 2150", startAt: 0.64, endAt: 0.85 },
   { path: "M 300 2560 L 330 2650 L 330 3190 L 292 3274", startAt: 0.9, endAt: 0.98 },
 ];
 
@@ -142,21 +158,21 @@ function CircuitPath({ progress, hasStarted }) {
   return (
     <svg
       className="circuit"
-      viewBox={`0 0 390 ${CONTENT_HEIGHT}`}
+      viewBox={`0 0 ${STAGE_WIDTH} ${CONTENT_HEIGHT}`}
       role="img"
       aria-label="A circuit-like path that draws itself while the page scrolls"
     >
-      <circle className="intro-signal signal-one" cx="195" cy="292" r="8" />
-      <circle className="intro-signal signal-two" cx="195" cy="292" r="8" />
+      <circle className="intro-signal signal-one" cx="195" cy="380" r="8" />
+      <circle className="intro-signal signal-two" cx="195" cy="380" r="8" />
       <g className={`scroll-circuit${hasStarted ? " is-active" : ""}`}>
         <path
           className="circuit-ghost"
-          d="M 195 304 L 195 410 L 44 452 L 44 565 L 190 565 L 324 645 L 324 990 L 38 1048 L 38 1550 L 350 1550 L 350 1780 L 250 1780 L 250 1880 L 210 1880 L 210 2030 L 150 2030 L 150 2240 L 115 2330 L 85 2384 L 42 2384 L 42 2190 L 18 2142 L 18 1600 L 34 1600"
+          d="M 195 392 L 195 500 L 44 542 L 44 655 L 190 655 L 324 735 L 324 990 L 38 1048 L 38 1550 L 350 1550 L 350 1780 L 304 1780 L 304 1960 L 282 1960 L 282 2138 L 225 2138 L 188 2240 L 115 2330 L 85 2384 L 42 2384 L 42 2190 L 18 2142 L 18 1600 L 34 1600"
         />
         <path
           ref={mainPath}
           className="circuit-line"
-          d="M 195 304 L 195 410 L 44 452 L 44 565 L 190 565 L 324 645 L 324 990 L 38 1048 L 38 1550 L 350 1550 L 350 1780 L 250 1780 L 250 1880 L 210 1880 L 210 2030 L 150 2030 L 150 2240 L 115 2330 L 85 2384 L 42 2384 L 42 2190 L 18 2142 L 18 1600 L 34 1600"
+          d="M 195 392 L 195 500 L 44 542 L 44 655 L 190 655 L 324 735 L 324 990 L 38 1048 L 38 1550 L 350 1550 L 350 1780 L 304 1780 L 304 1960 L 282 1960 L 282 2138 L 225 2138 L 188 2240 L 115 2330 L 85 2384 L 42 2384 L 42 2190 L 18 2142 L 18 1600 L 34 1600"
           style={{
             strokeDasharray: length,
             strokeDashoffset: dashOffset,
@@ -185,7 +201,6 @@ function CircuitPath({ progress, hasStarted }) {
           ))}
         </g>
         <rect className="robot-rail" x="339" y="2150" width="20" height="760" />
-        <circle className="rail-terminal top" cx="349" cy="2150" r="6" />
         {terminals.slice(1).map(([cx, cy], index) => (
           <circle
             key={`${cx}-${cy}-${index}`}
@@ -199,7 +214,7 @@ function CircuitPath({ progress, hasStarted }) {
       <circle
         className={`intro-terminal${hasStarted ? " is-connected" : ""}`}
         cx="195"
-        cy="292"
+        cy="380"
         r="8"
       />
     </svg>
@@ -208,7 +223,6 @@ function CircuitPath({ progress, hasStarted }) {
 
 export function App() {
   const stageRef = useRef(null);
-  const canvasRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [stageScale, setStageScale] = useState(1);
   const [hasStarted, setHasStarted] = useState(false);
@@ -216,14 +230,13 @@ export function App() {
   useEffect(() => {
     const updateProgress = () => {
       const stage = stageRef.current;
-      const canvas = canvasRef.current;
-      if (!stage || !canvas) return;
+      if (!stage) return;
 
-      setStageScale(Math.min(1, window.innerWidth / 390));
+      const nextScale = Math.min(1, window.innerWidth / STAGE_WIDTH);
+      setStageScale(nextScale);
       const rect = stage.getBoundingClientRect();
-      const canvasRect = canvas.getBoundingClientRect();
       const viewport = window.innerHeight || 1;
-      const end = Math.max(canvasRect.height - viewport, 1);
+      const end = Math.max(CONTENT_HEIGHT * nextScale - viewport, 1);
       const scrolled = Math.min(Math.max(-rect.top, 0), end);
       setHasStarted(scrolled > 2);
       setProgress(end <= 0 ? 1 : scrolled / end);
@@ -245,12 +258,11 @@ export function App() {
         ref={stageRef}
         style={{
           "--stage-scale": stageScale,
-          "--content-height": `${CONTENT_HEIGHT}px`,
-          "--frame-height": `${CONTENT_HEIGHT + EXTRA_BLANK_SPACE}px`,
+          width: `${STAGE_WIDTH * stageScale}px`,
+          height: `${(CONTENT_HEIGHT + EXTRA_BLANK_SPACE) * stageScale}px`,
         }}
       >
-        <div className="stage-canvas" ref={canvasRef}>
-          <p className="kicker">MOBILE / scroll-driven circuit path</p>
+        <div className="stage-canvas">
           <h1>
             wanna
             <br />
@@ -261,13 +273,13 @@ export function App() {
           <CircuitPath progress={progress} hasStarted={hasStarted} />
           {storyBlocks.map((block) => (
             <StoryBlock
-              key={block.id}
+              key={block.key ?? block.id}
               block={block}
               visible={hasStarted && progress >= block.revealAt}
             />
           ))}
         </div>
-        <div className="stage-blank" aria-hidden="true" />
+        <p className="end-marker">여기가 끝</p>
       </section>
     </main>
   );
