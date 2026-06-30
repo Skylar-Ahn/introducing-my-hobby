@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 const STAGE_WIDTH = 390;
 const CONTENT_HEIGHT = 7200;
-const EXTRA_BLANK_SPACE = 1200;
+const EXTRA_BLANK_SPACE = 1500;
 
 const storyBlocks = [
   {
@@ -221,6 +221,24 @@ function CircuitPath({ progress, hasStarted }) {
   );
 }
 
+function FinalCircuitHeart() {
+  return (
+    <section className="final-contact" aria-label="Contact">
+      <img
+        className="final-heart"
+        src="/final-circuit-heart.svg"
+        alt="Heart-shaped circuit"
+      />
+      <div className="contact-copy">
+        <p className="frequency-text">Same frequency?</p>
+        <p className="instagram-line">
+          <span>@skylarahn1</span>
+        </p>
+      </div>
+    </section>
+  );
+}
+
 export function App() {
   const stageRef = useRef(null);
   const [progress, setProgress] = useState(0);
@@ -278,8 +296,8 @@ export function App() {
               visible={hasStarted && progress >= block.revealAt}
             />
           ))}
+          <FinalCircuitHeart />
         </div>
-        <p className="end-marker">여기가 끝</p>
       </section>
     </main>
   );

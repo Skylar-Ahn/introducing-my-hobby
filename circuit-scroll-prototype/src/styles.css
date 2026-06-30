@@ -85,20 +85,6 @@ select {
   transform-origin: top left;
 }
 
-.end-marker {
-  position: absolute;
-  right: 0;
-  bottom: calc(48px * var(--stage-scale));
-  left: 0;
-  margin: 0;
-  color: #000;
-  font-size: calc(36px * var(--stage-scale));
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: 0;
-  text-align: center;
-}
-
 h1 {
   position: absolute;
   top: 54px;
@@ -265,6 +251,45 @@ h1 {
   line-height: 1.12;
   letter-spacing: 0;
   font-weight: 800;
+}
+
+.final-contact {
+  position: absolute;
+  top: 7788px;
+  left: 0;
+  width: 390px;
+  min-height: 820px;
+  padding: 42px 10px 0;
+  color: #000;
+  text-align: center;
+}
+
+.final-heart {
+  display: block;
+  width: 368px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.contact-copy {
+  margin-top: 62px;
+}
+
+.frequency-text {
+  margin: 0;
+  font-size: 40px;
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.instagram-line {
+  margin: 24px 0 0;
+  font-size: 24px;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-align: center;
 }
 
 @keyframes receiverSignal {
