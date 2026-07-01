@@ -30,7 +30,7 @@ const storyBlocks = [
     x: 142,
     y: 2920,
     width: 235,
-    revealAt: 0.43,
+    revealAt: 0.46,
   },
   {
     id: "04",
@@ -39,25 +39,25 @@ const storyBlocks = [
     x: 138,
     y: 3540,
     width: 245,
-    revealAt: 0.39,
+    revealAt: 0.51,
   },
   {
     id: "05",
     title: "I like robots.",
     body: "especially the boundary between motion, perception, and people",
     x: 62,
-    y: 4400,
+    y: 4520,
     width: 255,
-    revealAt: 0.67,
+    revealAt: 0.65,
   },
   {
     id: "06",
     title: "I like math, even when it hurts.",
     body: "abstraction, structure, and the weird comfort of difficult ideas",
-    x: 128,
+    x: 50,
     y: 5140,
-    width: 255,
-    revealAt: 0.75,
+    width: 166,
+    revealAt: 0.7,
   },
   {
     key: "07-copy",
@@ -86,21 +86,16 @@ const terminals = [
   [82, 1528],
   [279, 1600],
   [324, 2500],
-  [34, 3660],
-  [55, 5010],
-  [82, 5390],
-  [26, 5600],
-  [54, 5600],
-  [82, 5600],
-  [300, 5920],
+  [34, 3480],
+  [349, 5260],
+  [349, 5920],
   [258, 6900],
   [300, 7040],
 ];
 
 const shortCircuits = [
   { path: "M 90 1528 L 190 1528 L 273 1596", startAt: 0.09, endAt: 0.15 },
-  { path: "M 304 4720 L 304 4980 L 353 5260", startAt: 0.67, endAt: 0.86 },
-  { path: "M 300 5920 L 330 6060 L 330 6920 L 292 7100", startAt: 0.9, endAt: 0.98 },
+  { path: "M 349 5920 L 330 6060 L 330 6920 L 292 7100", startAt: 0.9, endAt: 0.98 },
 ];
 
 function StoryBlock({ block, visible }) {
@@ -167,12 +162,12 @@ function CircuitPath({ progress, hasStarted }) {
       <g className={`scroll-circuit${hasStarted ? " is-active" : ""}`}>
         <path
           className="circuit-ghost"
-          d="M 195 402 L 195 860 L 44 930 L 44 1490 L 190 1490 L 324 1596 L 324 2500 L 38 2605 L 38 3480 L 350 3480 L 350 4550 L 304 4550 L 304 4930 L 282 4930 L 282 5260 L 225 5260 L 188 5450 L 115 5560 L 85 5600 L 42 5600 L 42 5280 L 18 5200 L 18 3600 L 34 3600"
+          d="M 195 402 L 195 860 L 44 930 L 44 1490 L 190 1490 L 324 1596 L 324 2500 L 38 2605 L 38 3480 L 350 3480 L 350 4550 L 304 4550 L 304 5080 L 349 5260 L 349 6780"
         />
         <path
           ref={mainPath}
           className="circuit-line"
-          d="M 195 402 L 195 860 L 44 930 L 44 1490 L 190 1490 L 324 1596 L 324 2500 L 38 2605 L 38 3480 L 350 3480 L 350 4550 L 304 4550 L 304 4930 L 282 4930 L 282 5260 L 225 5260 L 188 5450 L 115 5560 L 85 5600 L 42 5600 L 42 5280 L 18 5200 L 18 3600 L 34 3600"
+          d="M 195 402 L 195 860 L 44 930 L 44 1490 L 190 1490 L 324 1596 L 324 2500 L 38 2605 L 38 3480 L 350 3480 L 350 4550 L 304 4550 L 304 5080 L 349 5260 L 349 6780"
           style={{
             strokeDasharray: length,
             strokeDashoffset: dashOffset,
@@ -187,17 +182,17 @@ function CircuitPath({ progress, hasStarted }) {
           />
         ))}
         <g className="pillar-chip" aria-hidden="true">
-          <rect className="pillar-body" x="55" y="2780" width="20" height="1180" />
-          <circle className="pillar-terminal" cx="65" cy="2780" r="6" />
+          <rect className="pillar-body" x="55" y="2440" width="20" height="1520" />
+          <circle className="pillar-terminal" cx="65" cy="2440" r="6" />
           <circle className="pillar-terminal" cx="65" cy="3960" r="6" />
         </g>
         <g className="chip-block" aria-hidden="true">
-          {[4250, 4282, 4314, 4346, 4378].map((y) => (
-            <path key={`left-${y}`} className="chip-pin" d={`M 34 ${y} L 56 ${y}`} />
+          {[4282, 4312, 4342, 4372].map((y) => (
+            <path key={`left-${y}`} className="chip-pin" d={`M 28 ${y} L 50 ${y}`} />
           ))}
-          <rect className="chip-body" x="56" y="4218" width="116" height="192" />
-          {[4250, 4282, 4314, 4346, 4378].map((y) => (
-            <path key={`right-${y}`} className="chip-pin" d={`M 152 ${y} L 174 ${y}`} />
+          <rect className="chip-body" x="50" y="4258" width="106" height="138" />
+          {[4282, 4312, 4342, 4372].map((y) => (
+            <path key={`right-${y}`} className="chip-pin" d={`M 156 ${y} L 178 ${y}`} />
           ))}
         </g>
         <rect className="robot-rail" x="339" y="5260" width="20" height="1520" />
@@ -224,11 +219,19 @@ function CircuitPath({ progress, hasStarted }) {
 function FinalCircuitHeart() {
   return (
     <section className="final-contact" aria-label="Contact">
-      <img
-        className="final-heart"
-        src="/final-circuit-heart.svg"
-        alt="Heart-shaped circuit"
-      />
+      <a
+        className="final-heart-link"
+        href="https://portfolio.skylar-ahn.com"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Open Skylar Ahn portfolio"
+      >
+        <img
+          className="final-heart"
+          src="/final-circuit-heart.svg"
+          alt="Heart-shaped circuit"
+        />
+      </a>
       <div className="contact-copy">
         <p className="frequency-text">Same frequency?</p>
         <p className="instagram-line">
